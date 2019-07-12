@@ -24,7 +24,7 @@ class Vertex(object):
         return  f"{ vertex } is adjancent to { adjancent }"
 
 
-    def addNeighbor(self, vertex, weight=0):
+    def add_neighbor(self, vertex, weight=0):
         """add a neighbor along a weighted edge"""
         if vertex not in self.neighbors:
             self.neighbors[vertex] = weight
@@ -32,17 +32,17 @@ class Vertex(object):
             raise KeyError("Vertecies are already neighbors")
 
 
-    def getNeighbors(self):
+    def get_neighbors(self):
         """return the neighbors of this vertex"""
         return self.neighbors.keys()
 
 
-    def getId(self):
+    def get_id(self):
         """return the id of this vertex"""
         return self.id
 
 
-    def getEdgeWeight(self, vertex):
+    def get_edge_weight(self, vertex):
         """return the weight of this edge"""
         return self.neighbors[vertex]
 
@@ -58,51 +58,51 @@ class Graph:
     def __init__(self):
         """ initializes a graph object with an empty dictionary.
         """
-        self.vertList = {}
-        self.numVertices = 0
+        self.vert_dict = {}
+        self.num_vertices = 0
 
 
     def __iter__(self):
         """iterate over the vertex objects in the
         graph, to use sytax: for v in g
         """
-        return iter(self.vertList.values())
+        return iter(self.vert_dict.values())
 
 
-    def addVertex(self, key):
+    def add_vertex(self, key):
         """add a new vertex object to the graph with
         the given key and return the vertex
         """
-        if key in self.vertList:
+        if key in self.vert_dict:
             return
         
-        self.numVertices += 1
+        self.num_vertices += 1
         to_add = Vertex(key)
         print(to_add)
-        self.vertList[key] = to_add
+        self.vert_dict[key] = to_add
 
         return to_add
 
 
-    def getVertex(self, key):
+    def get_vertex(self, key):
         """return the vertex if it exists"""
-        return self.vertList[key]
+        return self.vert_dict[key]
 
 
-    def addEdge(self, from_vert, to_vert, cost=0):
+    def add_edge(self, from_vert, to_vert, cost=0):
         """add an edge from vertex f to vertex t with a cost
         """
-        if from_vert not in self.vertList:
+        if from_vert not in self.vert_dict:
             raise KeyError(f"{ from_vert } does not exist.")
-        elif to_vert not in self.vertList:
+        elif to_vert not in self.vert_dict:
             raise KeyError(f"{ to_vert } does not exist.")
 
-        self.vertList[from_vert].addNeighbor(to_vert)
+        self.vert_dict[from_vert].add_neighbor(to_vert)
 
 
-    def getVertices(self):
+    def get_vertices(self):
         """return all the vertices in the graph"""
-        return self.vertList.keys()
+        return self.vert_dict.keys()
 
 
 
@@ -116,23 +116,21 @@ if __name__ == "__main__":
     g = Graph()
 
     # Add your friends
-    g.addVertex("Friend 1")
-    g.addVertex("Friend 2")
-    g.addVertex("Friend 3")
+    g.add_vertex("Friend 1")
+    g.add_vertex("Friend 2")
+    g.add_vertex("Friend 3")
 
     # ...  add all 10 including you ...
 
     # Add connections (non weighted edges for now)
-    g.addEdge("Friend 1", "Friend 2")
-    g.addEdge("Friend 2", "Friend 3")
+    g.add_edge("Friend 1", "Friend 2")
+    g.add_edge("Friend 2", "Friend 3")
 
     # Challenge 1: Output the vertices & edges
     # Print vertices
-    print("The vertices are: ", g.getVertices(), "\n")
+    print("The vertices are: ", g.get_vertices(), "\n")
 
     print("The edges are: ")
-    for v in g:
-        print(v)
-        # vertex = g.vertList[v]
-        # for w in vertex.getNeighbors():
-        #     print(f"( { vertex.getId() } , { w } )")
+    for v in g.vert_dict.values():
+        for w in v.get_neighbors():
+            print(f"( { v.get_id() } , { w } )")
