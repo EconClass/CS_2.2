@@ -1,11 +1,9 @@
 #!python
 
-""" Vertex Class
-A helper class for the Graph class that defines vertices and vertex neighbors.
-"""
-
-
 class Vertex(object):
+    """ Vertex Class
+    A helper class for the Graph class that defines vertices and vertex neighbors.
+    """
 
     def __init__(self, vertex):
         """initialize a vertex and its neighbors
@@ -47,13 +45,10 @@ class Vertex(object):
         return self.neighbors[vertex]
 
 
-""" Graph Class
-A class demonstrating the essential
-facts and functionalities of graphs.
-"""
-
-
 class Graph:
+    """ Graph Class
+    A class demonstrating the essential facts and functionalities of graphs.
+    """
 
     def __init__(self):
         """ initializes a graph object with an empty dictionary.
@@ -74,11 +69,10 @@ class Graph:
         the given key and return the vertex
         """
         if key in self.vert_dict:
-            return
+            raise KeyError("That vertex already exists.")
         
         self.num_vertices += 1
         to_add = Vertex(key)
-        print(to_add)
         self.vert_dict[key] = to_add
 
         return to_add
@@ -107,8 +101,6 @@ class Graph:
 
 
 # Driver code
-
-
 if __name__ == "__main__":
 
     # Challenge 1: Create the graph
